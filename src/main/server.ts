@@ -81,10 +81,13 @@ class JupyterServer {
                 '--JupyterApp.config_file_name=""',
                 // use our token rather than any pre-configured password
                 '--ServerApp.password=""',
-                '--ServerApp.allow_origin="*"'
+                '--ServerApp.allow_origin="*"',
+                // enable hidden files (let user decide whether to display them)
+                '--ContentsManager.allow_hidden=True'
             ], {
                 cwd: home,
                 env: {
+                    ...process.env,
                     PATH: this._registry.getAdditionalPathIncludesForPythonPath(this._info.environment.path),
                     JUPYTER_TOKEN: this._info.token,
                     JUPYTER_CONFIG_DIR: process.env.JLAB_DESKTOP_CONFIG_DIR || app.getPath('userData')
